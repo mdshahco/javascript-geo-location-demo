@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript - Geo-location</title>
+    <title>JavaScript Geolocation API</title>
+    <!-- daisyUI  & TailwindCSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.5/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body>
-    
-    
+
+<body class="bg-white min-h-screen" style="font-family:sans-serif">
+
+    <div class="hero min-h-screen bg-white text-base-100 ">
+        <div class="hero-content text-center">
+            <div class="">
+                <h1 class="text-3xl font-bold">Find Your Location</h1>
+                <p class="py-6">
+                    Easily find out your current location <br>
+                    (latitude and longitude). <br>
+                    Try it out here.
+                </p>
+                <button class="btn btn-outline btn-info" onclick="getlocation()">Show My Location</button>
+                <br>
+                <span id="output"></span><br><br>
+                <span class="bg-slate-400" id="mapurl"></span><br><br>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+        <aside>
+            <p>Copyright © 2023 - All right reserved by Md. Shah Alam</p>
+        </aside>
+    </footer>
+
+
+
+
+
+
+
+    <!-- custom js  -->
+    <script>
+        let output = document.getElementById("output");
+        function getlocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(displayPosition)
+            }
+            else {
+                alert("Your browser does not support Geolocation API.")
+            }
+        }
+
+        function displayPosition(position) {
+            let output = "<br>Your current location details:<br>" + "Latitude: " + position.coords.latitude + "<br>" + "Longitude: " + position.coords.longitude;
+            document.getElementById("output").innerHTML = output;
+            let mapurl = "https://www.google.com/maps/@" + position.coords.latitude + "," + position.coords.longitude + ",14z";
+            document.getElementById("mapurl").innerHTML = "<a href='" + mapurl + "' target='_blank'> Click here to see your location on the map.</a>";
+
+        }  
+    </script>
+
 </body>
+
 </html>
